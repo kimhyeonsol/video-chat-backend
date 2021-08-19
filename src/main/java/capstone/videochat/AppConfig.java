@@ -4,10 +4,9 @@ import capstone.videochat.repository.MeetingRepository;
 import capstone.videochat.repository.MemoryMeetingRepository;
 import capstone.videochat.repository.MemoryUserRepository;
 import capstone.videochat.repository.UserRepository;
-import capstone.videochat.service.MeetingService;
-import capstone.videochat.service.MeetingServiceImpl;
-import capstone.videochat.service.UserService;
-import capstone.videochat.service.UserServiceImpl;
+import capstone.videochat.repository.MongoDBAttendanceRepository;
+
+import capstone.videochat.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,6 +23,11 @@ public class AppConfig {
     }
 
     @Bean
+    public AttendanceService attendanceService() {
+        return new AttendanceServiceImpl(attendanceRepository());
+    }
+
+    @Bean
     public UserRepository userRepository() {
         return new MemoryUserRepository();
     }
@@ -31,5 +35,10 @@ public class AppConfig {
     @Bean
     public MeetingRepository meetingRepository() {
         return new MemoryMeetingRepository();
+    }
+
+    @Bean
+    public MongoDBAttendanceRepository attendanceRepository() {
+        return new MongoDBAttendanceRepository();
     }
 }

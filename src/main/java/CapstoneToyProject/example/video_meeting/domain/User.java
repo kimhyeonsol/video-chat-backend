@@ -1,10 +1,9 @@
-package capstone.videochat.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user") //컬렉션 이름
-public class User {
+public class User extends capstone.videochat.domain.User {
     @Id
     String id; //PRIMARY KEY
     String password;
