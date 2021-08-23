@@ -1,6 +1,7 @@
 package capstone.videochat.controller;
 
 import capstone.videochat.DTO.UserDTO;
+import capstone.videochat.service.AttendanceService;
 import capstone.videochat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-public class AttendanceController<AttendanceService> {
+public class AttendanceController {
     AttendanceService attendanceService;
 
     @Autowired
