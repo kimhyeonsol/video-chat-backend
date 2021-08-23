@@ -1,7 +1,10 @@
 package capstone.videochat.controller;
 
+
 import capstone.videochat.DTO.UserDTO;
 import capstone.videochat.service.AttendanceService;
+import capstone.videochat.domain.User;
+
 import capstone.videochat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +22,13 @@ public class AttendanceController {
 
     @PostMapping("attendance/checkFaceId")
     @ResponseBody
-    public void processCheckFaceId(@RequestBody UserDTO userdto){
+    public void processCheckFaceId(@RequestBody User user){
         //faceid check
     }
 
     @PostMapping("attendance/attend")
     @ResponseBody
-    public void processAttend(UserDTO userdto){
+    public void processAttend(User user){
         //faceid check
     }
 }

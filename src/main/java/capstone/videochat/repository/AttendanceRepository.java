@@ -1,7 +1,7 @@
 package capstone.videochat.repository;
 
-import capstone.videochat.DTO.UserDTO;
+import capstone.videochat.domain.User;
 
 public interface AttendanceRepository {
-    void save(UserDTO userdto);
+    void save(User user);
 }

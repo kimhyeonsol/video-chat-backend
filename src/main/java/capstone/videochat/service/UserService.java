@@ -1,6 +1,5 @@
 package capstone.videochat.service;
 
-
 import capstone.videochat.domain.User;
 
 public interface UserService {
