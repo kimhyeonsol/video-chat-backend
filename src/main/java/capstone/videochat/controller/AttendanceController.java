@@ -1,7 +1,7 @@
 package capstone.videochat.controller;
 
 
-import capstone.videochat.DTO.UserDTO;
+
 import capstone.videochat.service.AttendanceService;
 import capstone.videochat.domain.User;
 
