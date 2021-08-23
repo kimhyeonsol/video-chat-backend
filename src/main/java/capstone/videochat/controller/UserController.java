@@ -5,11 +5,13 @@ import capstone.videochat.service.MeetingService;
 import capstone.videochat.service.UserService;
 import capstone.videochat.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+@Controller
 public class UserController {
     UserService userService;
 
