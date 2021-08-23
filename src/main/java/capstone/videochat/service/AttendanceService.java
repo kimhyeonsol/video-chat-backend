@@ -1,8 +1,8 @@
 package capstone.videochat.service;
 
-import capstone.videochat.DTO.UserDTO;
+import capstone.videochat.domain.User;
 
 public interface AttendanceService {
-    boolean checkFaceId(UserDTO userdto);
-    boolean attend(UserDTO userdto);
+    boolean checkFaceId(User user);
+    boolean attend(User user);
 }
