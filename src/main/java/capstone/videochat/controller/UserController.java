@@ -1,12 +1,14 @@
 package capstone.videochat.controller;
 
-import capstone.videochat.DTO.UserDTO;
 import capstone.videochat.domain.User;
 import capstone.videochat.service.MeetingService;
 import capstone.videochat.service.UserService;
 import capstone.videochat.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class UserController {
     UserService userService;
@@ -42,14 +44,19 @@ public class UserController {
 
     @PostMapping("/user/login")
     @ResponseBody
-    public boolean processLogIn(@RequestBody final User user) {
+    public boolean processLogIn(@RequestBody final User user, HttpServletRequest request) {
         //로그인
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user); //세션에 user 정보 저장
         return userService.login(user);
     }
 
-//    @GetMapping("/user/logout")
-//    @ResponseBody
-//    public void logOut(){
-//        //로그아웃 로그인 페이지 렌더링
-//    }
+    @GetMapping("/user/logout")
+    @ResponseBody
+    public void logOut(HttpServletRequest request){
+        //로그아웃 로그인 페이지 렌더링
+        HttpSession session = request.getSession();
+        session.removeAttribute("user"); //세션에 유지된 user 정보 삭제
+        session.invalidate();
+    }
 }
