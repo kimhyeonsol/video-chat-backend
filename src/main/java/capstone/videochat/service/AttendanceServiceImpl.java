@@ -1,6 +1,6 @@
 package capstone.videochat.service;
 
-import capstone.videochat.DTO.UserDTO;
+import capstone.videochat.domain.User;
 import capstone.videochat.repository.MongoDBAttendanceRepository;
 
 
@@ -13,14 +13,14 @@ public class AttendanceServiceImpl implements AttendanceService{
     }
 
     @Override
-    public boolean checkFaceId(UserDTO userdto) {
+    public boolean checkFaceId(User user) {
         //opencv 기능
         return true;
     }
 
     @Override
-    public boolean attend(UserDTO userdto) {
-        this.attendanceRepository.save(userdto);
+    public boolean attend(User user) {
+        this.attendanceRepository.save(user);
         return true;
     }
 }
