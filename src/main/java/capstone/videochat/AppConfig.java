@@ -1,14 +1,16 @@
 package capstone.videochat;
 
-import capstone.videochat.repository.MeetingRepository;
-import capstone.videochat.repository.MemoryMeetingRepository;
-import capstone.videochat.repository.MemoryUserRepository;
-import capstone.videochat.repository.UserRepository;
-import capstone.videochat.repository.MongoDBAttendanceRepository;
+import capstone.videochat.repository.*;
 
 import capstone.videochat.service.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.config.MongoDbFactoryParser;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 @Configuration
 public class AppConfig {
@@ -29,7 +31,7 @@ public class AppConfig {
 
     @Bean
     public UserRepository userRepository() {
-        return new MemoryUserRepository();
+        return new MongoDBUserRepository();
     }
 
     @Bean
@@ -41,4 +43,21 @@ public class AppConfig {
     public MongoDBAttendanceRepository attendanceRepository() {
         return new MongoDBAttendanceRepository();
     }
+
+
+    //mongo db config
+
+    @Value("${mongodb.test.connectionString}")
+    private String connectionString;
+
+    @Bean
+    public MongoDatabaseFactory mongoDatabaseFactory(){
+        return new SimpleMongoClientDatabaseFactory(connectionString);
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate(){
+        return new MongoTemplate(mongoDatabaseFactory());
+    }
+
 }

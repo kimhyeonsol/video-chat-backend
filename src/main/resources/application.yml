@@ -1,7 +1,12 @@
+#
+#spring:
+#  data:
+#    mongodb:
+#      host: localhost
+#      port: 27017
+#      database: video_meeting
 
-spring:
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: video_meeting
+
+mongodb:
+  test:
+    connectionString: mongodb://localhost:27017/video_meeting

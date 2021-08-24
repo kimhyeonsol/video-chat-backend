@@ -3,8 +3,11 @@ package capstone.videochat.service;
 import capstone.videochat.domain.User;
 import capstone.videochat.repository.MongoDBUserRepository;
 import capstone.videochat.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserServiceImpl implements UserService {
+
+    @Autowired
     UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -13,17 +16,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void join(User user) {
-        userRepository = new MongoDBUserRepository();
         userRepository.save(user);
     }
 
     @Override
     public boolean duplicateIdCheck(User user) {
         User findUser;
+        System.out.println("service:"+user.getId());
 
-        userRepository = new MongoDBUserRepository();
         findUser = userRepository.findById(user.getId());
-
         if(findUser!=null){
             System.out.println("이미 존재하는 ID입니다!");
             return false;
@@ -34,8 +35,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean login(User user) {
         User findUser;
-
-        userRepository = new MongoDBUserRepository();
         findUser = userRepository.findById(user.getId());
 
         if(findUser.getPassword() != user.getPassword()){

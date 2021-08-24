@@ -8,11 +8,11 @@ import java.io.File;
 @Document(collection = "user") //컬렉션 이름
 public class User {
     @Id
-    String id; //PRIMARY KEY
-    String password;
-    String name;
-    String major;
-    String studentId;
+    private String id; //PRIMARY KEY
+    private String password;
+    private String name;
+    private String major;
+    private String studentId;
     File faceImage_1;
     File faceImage_2;
     File faceImage_3;

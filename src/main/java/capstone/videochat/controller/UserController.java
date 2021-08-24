@@ -26,9 +26,12 @@ public class UserController {
 //        //회원가입 페이지 렌더링
 //    }
 
+@CrossOrigin("*")
     @PostMapping("/user/new-account")
     @ResponseBody
     public boolean processCreateAccount(@RequestBody final User user){
+
+        System.out.println(user.getId());
         //중복체크
         if (userService.duplicateIdCheck(user)==false){
             return false;
@@ -43,22 +46,23 @@ public class UserController {
 //    public void displayLogInPage(){
 //        //로그인 페이지 렌더링
 //    }
+//@CrossOrigin("*")
+//    @PostMapping("/user/login")
+//    @ResponseBody
+//    public boolean processLogIn(@RequestBody final User user, HttpServletRequest request) {
+//        //로그인
+//        HttpSession session = request.getSession();
+//        session.setAttribute("user", user); //세션에 user 정보 저장
+//        return userService.login(user);
+//    }
 
-    @PostMapping("/user/login")
-    @ResponseBody
-    public boolean processLogIn(@RequestBody final User user, HttpServletRequest request) {
-        //로그인
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user); //세션에 user 정보 저장
-        return userService.login(user);
-    }
-
-    @GetMapping("/user/logout")
-    @ResponseBody
-    public void logOut(HttpServletRequest request){
-        //로그아웃 로그인 페이지 렌더링
-        HttpSession session = request.getSession();
-        session.removeAttribute("user"); //세션에 유지된 user 정보 삭제
-        session.invalidate();
-    }
+//    @CrossOrigin("*")
+//    @GetMapping("/user/logout")
+//    @ResponseBody
+//    public void logOut(HttpServletRequest request){
+//        //로그아웃 로그인 페이지 렌더링
+//        HttpSession session = request.getSession();
+//        session.removeAttribute("user"); //세션에 유지된 user 정보 삭제
+//        session.invalidate();
+//    }
 }
