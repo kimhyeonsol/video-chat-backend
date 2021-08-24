@@ -46,15 +46,15 @@ public class UserController {
 //    public void displayLogInPage(){
 //        //로그인 페이지 렌더링
 //    }
-//@CrossOrigin("*")
-//    @PostMapping("/user/login")
-//    @ResponseBody
-//    public boolean processLogIn(@RequestBody final User user, HttpServletRequest request) {
-//        //로그인
-//        HttpSession session = request.getSession();
-//        session.setAttribute("user", user); //세션에 user 정보 저장
-//        return userService.login(user);
-//    }
+    @CrossOrigin("*")
+    @PostMapping("/user/login")
+    @ResponseBody
+    public boolean processLogIn(@RequestBody final User user, HttpServletRequest request) {
+        //로그인
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user); //세션에 user 정보 저장
+        return userService.login(user);
+    }
 
 //    @CrossOrigin("*")
 //    @GetMapping("/user/logout")
