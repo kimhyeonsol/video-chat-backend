@@ -5,6 +5,8 @@ import capstone.videochat.repository.MongoDBUserRepository;
 import capstone.videochat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Objects;
+
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -37,12 +39,12 @@ public class UserServiceImpl implements UserService {
         User findUser;
         findUser = userRepository.findById(user.getId());
 
-        if(findUser.getPassword() != user.getPassword()){
-            System.out.println("로그인 오류!");
-            return false;
+        if(Objects.equals(findUser.getPassword(), user.getPassword())){
+            System.out.println("로그인 성공!");
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     @Override
