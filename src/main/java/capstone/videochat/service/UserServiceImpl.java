@@ -39,6 +39,10 @@ public class UserServiceImpl implements UserService {
         User findUser;
         findUser = userRepository.findById(user.getId());
 
+        if(findUser == null){
+            System.out.println("아이디 없음!");
+            return false;
+        }
         if(Objects.equals(findUser.getPassword(), user.getPassword())){
             System.out.println("로그인 성공!");
             return true;
