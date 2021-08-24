@@ -22,6 +22,7 @@ public class WebRTCController {
     * 메인 화면
     * id - 방넘버, rooms - 방 리스트, uuid - 유저 아이디
     * */
+
     @GetMapping(value = "/room")
     @ResponseBody
     public MainRoomDTO createRoom(final Long id, final String uuid) {

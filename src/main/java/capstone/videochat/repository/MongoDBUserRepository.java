@@ -11,6 +11,7 @@ public class MongoDBUserRepository implements UserRepository {
     @Autowired
     MongoTemplate mongoTemplate;
 
+
     @Override
     public void save(User user) {
         mongoTemplate.insert(user, "user");
