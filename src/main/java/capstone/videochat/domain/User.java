@@ -6,14 +6,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "user") //컬렉션 이름
 public class User {
     @Id
-    String id; //PRIMARY KEY
-    String password;
-    String name;
-    String major;
-    String studentId;
-    byte[] faceImage_1;
-    byte[] faceImage_2;
-    byte[] faceImage_3;
+    private String id; //PRIMARY KEY
+    private String password;
+    private String name;
+    private String major;
+    private String studentId;
+    private String faceImage_1;
+    private String faceImage_2;
+    private String faceImage_3;
 
     public String getId() {
         return id;
@@ -55,27 +55,27 @@ public class User {
         this.studentId = studentId;
     }
 
-    public byte[] getFaceImage_1() {
+    public String getFaceImage_1() {
         return faceImage_1;
     }
 
-    public void setFaceImage_1(byte[] faceImage_1) {
+    public void setFaceImage_1(String faceImage_1) {
         this.faceImage_1 = faceImage_1;
     }
 
-    public byte[] getFaceImage_2() {
+    public String getFaceImage_2() {
         return faceImage_2;
     }
 
-    public void setFaceImage_2(byte[] faceImage_2) {
+    public void setFaceImage_2(String faceImage_2) {
         this.faceImage_2 = faceImage_2;
     }
 
-    public byte[] getFaceImage_3() {
+    public String getFaceImage_3() {
         return faceImage_3;
     }
 
-    public void setFaceImage_3(byte[] faceImage_3) {
+    public void setFaceImage_3(String faceImage_3) {
         this.faceImage_3 = faceImage_3;
     }
 
