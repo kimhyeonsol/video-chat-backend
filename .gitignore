@@ -38,3 +38,5 @@ out/
 
 ### Class diagram###
 *.puml
+
+src/main/resources/static/main.html
