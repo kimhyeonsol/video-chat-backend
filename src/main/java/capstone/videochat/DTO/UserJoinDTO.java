@@ -1,14 +1,14 @@
 package capstone.videochat.DTO;
 
-public class UserDTO {
+public class UserJoinDTO {
     String id;
     String password;
     String name;
     String major;
     String studentId;
-    byte[] faceFront;
-    byte[] faceLeft;
-    byte[] faceRight;
+    String faceImage_1;
+    String faceImage_2;
+    String faceImage_3;
 
     public String getId() {
         return id;
@@ -50,28 +50,27 @@ public class UserDTO {
         this.studentId = studentId;
     }
 
-    public byte[] getFaceFront() {
-        return faceFront;
+    public String getFaceImage_1() {
+        return faceImage_1;
     }
 
-    public void setFaceFront(byte[] faceFront) {
-        this.faceFront = faceFront;
+    public void setFaceImage_1(String faceImage_1) {
+        this.faceImage_1 = faceImage_1;
     }
 
-    public byte[] getFaceLeft() {
-        return faceLeft;
+    public String getFaceImage_2() {
+        return faceImage_2;
     }
 
-    public void setFaceLeft(byte[] faceLeft) {
-        this.faceLeft = faceLeft;
+    public void setFaceImage_2(String faceImage_2) {
+        this.faceImage_2 = faceImage_2;
     }
 
-    public byte[] getFaceRight() {
-        return faceRight;
+    public String getFaceImage_3() {
+        return faceImage_3;
     }
 
-    public void setFaceRight(byte[] faceRight) {
-        this.faceRight = faceRight;
+    public void setFaceImage_3(String faceImage_3) {
+        this.faceImage_3 = faceImage_3;
     }
-
 }
