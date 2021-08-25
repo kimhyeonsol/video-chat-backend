@@ -1,10 +1,13 @@
 package capstone.videochat.service;
 
+import capstone.videochat.DTO.UserJoinDTO;
+import capstone.videochat.DTO.UserLoginDTO;
 import capstone.videochat.domain.User;
 import capstone.videochat.repository.MongoDBUserRepository;
 import capstone.videochat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class UserServiceImpl implements UserService {
@@ -17,16 +20,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void join(User user) {
+    public void join(UserJoinDTO userJoinDTO) {
+        User user = new User();
+        user.setId(userJoinDTO.getId());
+        user.setPassword(userJoinDTO.getPassword());
+        user.setName(userJoinDTO.getName());
+        user.setMajor(userJoinDTO.getMajor());
+        user.setStudentId(userJoinDTO.getStudentId());
+        user.setFaceImage_1(userJoinDTO.getFaceImage_1());
+        user.setFaceImage_2(userJoinDTO.getFaceImage_2());
+        user.setFaceImage_3(userJoinDTO.getFaceImage_3());
+
         userRepository.save(user);
     }
 
     @Override
-    public boolean duplicateIdCheck(User user) {
+    public boolean duplicateIdCheck(UserJoinDTO userJoinDTO) {
         User findUser;
-        System.out.println("service:"+user.getId());
 
-        findUser = userRepository.findById(user.getId());
+        findUser = userRepository.findById(userJoinDTO.getId());
         if(findUser!=null){
             System.out.println("이미 존재하는 ID입니다!");
             return false;
@@ -35,24 +47,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(User user) {
+    public User checkUserWithSessionKey(String sessionId) {
+        return userRepository.checkUserWithSessionKey(sessionId);
+    }
+
+    @Override
+    public void automaticLogin(String userId, String sessionId, Date sessionLimit) {
+        userRepository.update(userId, sessionId, sessionLimit);
+    }
+
+    @Override
+    public String recallName(String userId) {
         User findUser;
-        findUser = userRepository.findById(user.getId());
+
+        findUser = userRepository.findById(userId);
+
+        return findUser.getName();
+    }
+
+    @Override
+    public boolean login(UserLoginDTO userLoginDTO) {
+        User findUser;
+
+        findUser = userRepository.findById(userLoginDTO.getId());
 
         if(findUser == null){
             System.out.println("아이디 없음!");
             return false;
         }
-        if(Objects.equals(findUser.getPassword(), user.getPassword())){
+        if(Objects.equals(findUser.getPassword(), userLoginDTO.getPassword())){
             System.out.println("로그인 성공!");
             return true;
         }
 
         return false;
-    }
-
-    @Override
-    public void logOut() {
-
     }
 }

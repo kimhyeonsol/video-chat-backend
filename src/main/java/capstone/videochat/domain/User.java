@@ -3,6 +3,8 @@ package capstone.videochat.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "user") //컬렉션 이름
 public class User {
     @Id
@@ -14,6 +16,8 @@ public class User {
     private String faceImage_1;
     private String faceImage_2;
     private String faceImage_3;
+    private String sessionId;
+    private Date validTime;
 
     public String getId() {
         return id;
@@ -79,4 +83,19 @@ public class User {
         this.faceImage_3 = faceImage_3;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public Date getValidTime() {
+        return validTime;
+    }
+
+    public void setValidTime(Date validTime) {
+        this.validTime = validTime;
+    }
 }
