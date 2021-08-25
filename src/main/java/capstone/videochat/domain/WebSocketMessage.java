@@ -10,6 +10,7 @@ public class WebSocketMessage {
     private Object sdp;
 
     public WebSocketMessage() {
+
     }
 
     public WebSocketMessage(final String from,

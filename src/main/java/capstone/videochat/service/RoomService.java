@@ -112,6 +112,7 @@ public class RoomService {
     }
 
     public WebSocketSession addClient(final Room room, final String name, final WebSocketSession session) {
+        System.out.println("hihi");
         return room.getClients().put(name, session);
     }
 
