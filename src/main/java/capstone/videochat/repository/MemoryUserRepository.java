@@ -16,6 +16,11 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     @Override
+    public User findBySessionId(String sessionId) {
+        return null;
+    }
+
+    @Override
     public User checkUserWithSessionKey(String sessionId) {
         return null;
     }

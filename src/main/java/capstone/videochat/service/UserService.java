@@ -1,5 +1,7 @@
 package capstone.videochat.service;
 
+import capstone.videochat.DTO.UserIdDTO;
+import capstone.videochat.DTO.UserSessionIdDTO;
 import capstone.videochat.DTO.UserJoinDTO;
 import capstone.videochat.DTO.UserLoginDTO;
 import capstone.videochat.domain.User;
@@ -12,6 +14,7 @@ public interface UserService {
     User checkUserWithSessionKey(String sessionId);
     void automaticLogin(String userId, String sessionId, Date sessionLimit);
     String recallName(String userId);
+    UserIdDTO recallUserId(UserSessionIdDTO userSessionIdDTO);
     boolean login(UserLoginDTO userLoginDTO);
 }
 

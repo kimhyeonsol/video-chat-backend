@@ -1,11 +1,7 @@
 package capstone.videochat.controller;
 
-import capstone.videochat.DTO.UserJoinDTO;
-import capstone.videochat.DTO.UserLoginDTO;
-import capstone.videochat.domain.User;
-import capstone.videochat.service.MeetingService;
+import capstone.videochat.DTO.*;
 import capstone.videochat.service.UserService;
-import capstone.videochat.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +10,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
@@ -54,9 +52,17 @@ public class UserController {
     @CrossOrigin("*")
     @PostMapping("/user/login")
     @ResponseBody
-    public boolean processLogIn(@RequestBody final UserLoginDTO userLoginDTO, HttpServletRequest request, HttpServletResponse response) {
+    public UserCookieDTO processLogIn(@RequestBody final UserLoginDTO userLoginDTO, HttpServletRequest request, HttpServletResponse response) throws ParseException {
         //로그인
+        UserCookieDTO userCookieDTO = new UserCookieDTO();
+
         boolean result = userService.login(userLoginDTO);
+
+        userCookieDTO.setLoginResult(result);
+        userCookieDTO.setCookieName(null);
+        userCookieDTO.setSessionId(null);
+        userCookieDTO.setValidTime(null);
+
         if(result) { //로그인 성공 시
             HttpSession session = request.getSession();
             session.setAttribute("userId", userLoginDTO.getId()); //세션에 user 정보 저장
@@ -65,19 +71,31 @@ public class UserController {
                 session.removeAttribute("userId");// 기존값 제거
             }
 
-            if(userLoginDTO.getUseCookie()){ //자동 로그인 체크했을 시
+            if(userLoginDTO.getUseCookie()){ //로그인 기억하기 체크했을 시
                 Cookie cookie = new Cookie("loginCookie", session.getId());
                 cookie.setPath("/");
                 int amount = 60*60*24*7;
                 cookie.setMaxAge(amount); //쿠키 유효시간 7일
                 response.addCookie(cookie); //쿠키 적용
 
-                Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
+                Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
+
                 userService.automaticLogin(userLoginDTO.getId(), session.getId(), sessionLimit);
+
+                userCookieDTO.setCookieName("loginCookie");
+                userCookieDTO.setSessionId(session.getId());
+                userCookieDTO.setValidTime(sessionLimit);
             }
         }
 
-        return result;
+        return userCookieDTO;
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/user/rememberId")
+    @ResponseBody
+    public UserIdDTO responseUserId(@RequestBody final UserSessionIdDTO userSessionIdDTO){
+        return userService.recallUserId(userSessionIdDTO);
     }
 
     @CrossOrigin("*")
