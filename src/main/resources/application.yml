@@ -13,7 +13,7 @@ mongodb:
 
 
 server:
-  port: 1111
+  port: 8443
   servlet:
     session:
       timeout: 30
