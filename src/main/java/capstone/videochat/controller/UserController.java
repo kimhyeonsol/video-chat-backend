@@ -102,6 +102,13 @@ public class UserController {
     }
 
     @CrossOrigin("*")
+    @PostMapping("/user/getName")
+    @ResponseBody
+    public UserNameDTO responseUserName(@RequestBody final UserIdDTO UserIdDTO){
+        return userService.responseUserName(UserIdDTO);
+    }
+
+    @CrossOrigin("*")
     @PostMapping("/user/rememberId")
     @ResponseBody
     public UserIdDTO responseUserId(@RequestBody final UserSessionIdDTO userSessionIdDTO){
