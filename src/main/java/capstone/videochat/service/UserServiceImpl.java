@@ -1,9 +1,10 @@
 package capstone.videochat.service;
 
+import capstone.videochat.DTO.UserIdDTO;
+import capstone.videochat.DTO.UserSessionIdDTO;
 import capstone.videochat.DTO.UserJoinDTO;
 import capstone.videochat.DTO.UserLoginDTO;
 import capstone.videochat.domain.User;
-import capstone.videochat.repository.MongoDBUserRepository;
 import capstone.videochat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -63,6 +64,17 @@ public class UserServiceImpl implements UserService {
         findUser = userRepository.findById(userId);
 
         return findUser.getName();
+    }
+
+    @Override
+    public UserIdDTO recallUserId(UserSessionIdDTO userSessionIdDTO) {
+        User findUser;
+        UserIdDTO userIdDTO = new UserIdDTO();
+
+        findUser = userRepository.findBySessionId(userSessionIdDTO.getSessionId());
+        userIdDTO.setId(findUser.getId());
+
+        return userIdDTO;
     }
 
     @Override

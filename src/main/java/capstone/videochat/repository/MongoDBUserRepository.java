@@ -32,6 +32,19 @@ public class MongoDBUserRepository implements UserRepository {
     }
 
     @Override
+    public User findBySessionId(String sessionId) {
+        User findUser;
+
+        Criteria criteria = new Criteria("sessionId");
+        criteria.is(sessionId);
+
+        Query query = new Query(criteria);
+        findUser = mongoTemplate.findOne(query, User.class, "user");
+
+        return findUser;
+    }
+
+    @Override
     public User checkUserWithSessionKey(String sessionId) {
         User findUser;
 

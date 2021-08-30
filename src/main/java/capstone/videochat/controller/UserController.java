@@ -1,11 +1,7 @@
 package capstone.videochat.controller;
 
-import capstone.videochat.DTO.UserJoinDTO;
-import capstone.videochat.DTO.UserLoginDTO;
-import capstone.videochat.domain.User;
-import capstone.videochat.service.MeetingService;
+import capstone.videochat.DTO.*;
 import capstone.videochat.service.UserService;
-import capstone.videochat.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +10,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
@@ -25,12 +23,12 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/user/new-account")
+    //    @GetMapping("/user/new-account")
 //    @ResponseBody
 //    public void displayCreateAccountPage(){
 //        //회원가입 페이지 렌더링
 //    }
-
+//
     @CrossOrigin("*")
     @PostMapping("/user/new-account")
     @ResponseBody
@@ -54,9 +52,17 @@ public class UserController {
     @CrossOrigin("*")
     @PostMapping("/user/login")
     @ResponseBody
-    public boolean processLogIn(@RequestBody final UserLoginDTO userLoginDTO, HttpServletRequest request, HttpServletResponse response) {
+    public UserCookieDTO processLogIn(@RequestBody final UserLoginDTO userLoginDTO, HttpServletRequest request, HttpServletResponse response) throws ParseException {
         //로그인
+        UserCookieDTO userCookieDTO = new UserCookieDTO();
+
         boolean result = userService.login(userLoginDTO);
+
+        userCookieDTO.setLoginResult(result);
+        userCookieDTO.setCookieName(null);
+        userCookieDTO.setSessionId(null);
+        userCookieDTO.setValidTime(null);
+
         if(result) { //로그인 성공 시
             HttpSession session = request.getSession();
             session.setAttribute("userId", userLoginDTO.getId()); //세션에 user 정보 저장
@@ -73,11 +79,33 @@ public class UserController {
                 response.addCookie(cookie); //쿠키 적용
 
                 Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
+
                 userService.automaticLogin(userLoginDTO.getId(), session.getId(), sessionLimit);
+
+                userCookieDTO.setCookieName("loginCookie");
+                userCookieDTO.setSessionId(session.getId());
+                userCookieDTO.setValidTime(sessionLimit);
+
+                /*SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                String time = String.valueOf(System.currentTimeMillis() + (1000*amount));
+                Date sessionLimit = dataFormat.parse(time);
+
+                userService.automaticLogin(userLoginDTO.getId(), session.getId(), sessionLimit);
+
+                userCookieDTO.setCookieName("loginCookie");
+                userCookieDTO.setSessionId(session.getId());
+                userCookieDTO.setValidTime(sessionLimit);*/
             }
         }
 
-        return result;
+        return userCookieDTO;
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/user/rememberId")
+    @ResponseBody
+    public UserIdDTO responseUserId(@RequestBody final UserSessionIdDTO userSessionIdDTO){
+        return userService.recallUserId(userSessionIdDTO);
     }
 
     @CrossOrigin("*")
@@ -85,6 +113,7 @@ public class UserController {
     @ResponseBody
     public void logOut(HttpServletRequest request){
         //로그아웃 로그인 페이지 렌더링
+        System.out.println("Logout!");
         HttpSession session = request.getSession();
         session.invalidate(); //세션에 유지된 정보 삭제
     }

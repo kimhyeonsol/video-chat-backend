@@ -19,9 +19,9 @@ public class WebRTCController {
     }
 
     /*
-    * 메인 화면
-    * id - 방넘버, rooms - 방 리스트, uuid - 유저 아이디
-    * */
+     * 메인 화면
+     * id - 방넘버, rooms - 방 리스트, uuid - 유저 아이디
+     * */
 
     @GetMapping(value = "/room")
     @ResponseBody
@@ -31,8 +31,8 @@ public class WebRTCController {
     }
 
     /*
-    * 새로운 방 생성
-    * */
+     * 새로운 방 생성
+     * */
     @PostMapping(value = "/room")
     @ResponseBody
     public MainRoomDTO processRoomSelection(@ModelAttribute("id") final String sid, @ModelAttribute("uuid") final String uuid, final BindingResult binding) {
@@ -50,8 +50,8 @@ public class WebRTCController {
     }
 
     /*
-    * 방 나가기
-    * */
+     * 방 나가기
+     * */
     @GetMapping("/room/{sid}/user/{uuid}/exit")
     @ResponseBody
     public MainRoomDTO processRoomExit(@PathVariable("sid") final String sid, @PathVariable("uuid") final String uuid) {
