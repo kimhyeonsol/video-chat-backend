@@ -23,12 +23,12 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @GetMapping("/user/new-account")
+    //    @GetMapping("/user/new-account")
 //    @ResponseBody
 //    public void displayCreateAccountPage(){
 //        //회원가입 페이지 렌더링
 //    }
-
+//
     @CrossOrigin("*")
     @PostMapping("/user/new-account")
     @ResponseBody
@@ -71,20 +71,30 @@ public class UserController {
                 session.removeAttribute("userId");// 기존값 제거
             }
 
-            if(userLoginDTO.getUseCookie()){ //로그인 기억하기 체크했을 시
+            if(userLoginDTO.getUseCookie()){ //자동 로그인 체크했을 시
                 Cookie cookie = new Cookie("loginCookie", session.getId());
                 cookie.setPath("/");
                 int amount = 60*60*24*7;
                 cookie.setMaxAge(amount); //쿠키 유효시간 7일
                 response.addCookie(cookie); //쿠키 적용
 
-                Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
+                Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 
                 userService.automaticLogin(userLoginDTO.getId(), session.getId(), sessionLimit);
 
                 userCookieDTO.setCookieName("loginCookie");
                 userCookieDTO.setSessionId(session.getId());
                 userCookieDTO.setValidTime(sessionLimit);
+
+                /*SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                String time = String.valueOf(System.currentTimeMillis() + (1000*amount));
+                Date sessionLimit = dataFormat.parse(time);
+
+                userService.automaticLogin(userLoginDTO.getId(), session.getId(), sessionLimit);
+
+                userCookieDTO.setCookieName("loginCookie");
+                userCookieDTO.setSessionId(session.getId());
+                userCookieDTO.setValidTime(sessionLimit);*/
             }
         }
 
@@ -103,6 +113,7 @@ public class UserController {
     @ResponseBody
     public void logOut(HttpServletRequest request){
         //로그아웃 로그인 페이지 렌더링
+        System.out.println("Logout!");
         HttpSession session = request.getSession();
         session.invalidate(); //세션에 유지된 정보 삭제
     }
