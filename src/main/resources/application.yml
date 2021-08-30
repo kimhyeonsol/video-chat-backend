@@ -11,6 +11,8 @@ mongodb:
   test:
     connectionString: mongodb://localhost:27017/video_meeting
 
+
+
 server:
   port: 1111
   servlet:
