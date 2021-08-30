@@ -10,3 +10,16 @@
 mongodb:
   test:
     connectionString: mongodb://localhost:27017/video_meeting
+
+
+server:
+  port: 1111
+  servlet:
+    session:
+      timeout: 30
+  ssl:
+    enabled: true
+    key-alias: tomcat
+    key-store: keystore.p12
+    key-store-password: 123456
+    ket-store-type: PKCS12
