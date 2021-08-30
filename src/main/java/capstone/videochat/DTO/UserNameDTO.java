@@ -1,13 +1,13 @@
 package capstone.videochat.DTO;
 
 public class UserNameDTO {
-    String Name;
+    String name;
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 }
