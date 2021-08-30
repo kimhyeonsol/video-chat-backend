@@ -85,16 +85,6 @@ public class UserController {
                 userCookieDTO.setCookieName("loginCookie");
                 userCookieDTO.setSessionId(session.getId());
                 userCookieDTO.setValidTime(sessionLimit);
-
-                /*SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                String time = String.valueOf(System.currentTimeMillis() + (1000*amount));
-                Date sessionLimit = dataFormat.parse(time);
-
-                userService.automaticLogin(userLoginDTO.getId(), session.getId(), sessionLimit);
-
-                userCookieDTO.setCookieName("loginCookie");
-                userCookieDTO.setSessionId(session.getId());
-                userCookieDTO.setValidTime(sessionLimit);*/
             }
         }
 
