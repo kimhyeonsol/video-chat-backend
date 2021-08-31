@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import java.util.Date;
 
 public class MongoDBUserRepository implements UserRepository {
+    
     @Autowired
     MongoTemplate mongoTemplate;
 
