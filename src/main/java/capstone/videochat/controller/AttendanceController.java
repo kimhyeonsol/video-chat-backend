@@ -2,6 +2,7 @@ package capstone.videochat.controller;
 
 
 
+import capstone.videochat.domain.Attendance;
 import capstone.videochat.service.AttendanceService;
 import capstone.videochat.domain.User;
 
@@ -30,7 +31,7 @@ public class AttendanceController {
 
     @PostMapping("attendance/attend")
     @ResponseBody
-    public void processAttend(User user){
-        //faceid check
+    public void processAttend(Attendance attendance){
+        attendanceService.attend(attendance);
     }
 }

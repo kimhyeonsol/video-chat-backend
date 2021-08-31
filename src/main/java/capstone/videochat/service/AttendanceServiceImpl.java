@@ -1,5 +1,6 @@
 package capstone.videochat.service;
 
+import capstone.videochat.domain.Attendance;
 import capstone.videochat.domain.User;
 import capstone.videochat.repository.MongoDBAttendanceRepository;
 
@@ -19,8 +20,8 @@ public class AttendanceServiceImpl implements AttendanceService{
     }
 
     @Override
-    public boolean attend(User user) {
-        this.attendanceRepository.save(user);
+    public boolean attend(Attendance attendance) {
+        this.attendanceRepository.save(attendance);
         return true;
     }
 }
