@@ -7,27 +7,31 @@ import capstone.videochat.domain.Attendance;
 import capstone.videochat.service.AttendanceService;
 import capstone.videochat.domain.User;
 
+import capstone.videochat.service.FaceDetectionService;
 import capstone.videochat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Controller
 public class AttendanceController {
-    AttendanceService attendanceService;
+
+    @Autowired AttendanceService attendanceService;
+    @Autowired FaceDetectionService faceDetectionService;
 
     @Autowired
     public AttendanceController(AttendanceService attendanceService) {
         this.attendanceService = attendanceService;
     }
 
+    @CrossOrigin("*")
     @PostMapping("attendance/checkFaceId")
     @ResponseBody
-    public void processCheckFaceId(@RequestBody User user){
-        //faceid check
+    public boolean processCheckFaceId(@RequestBody User user) throws IOException {
+        final boolean isHuman = faceDetectionService.checkUserAttendance(user);
+        return isHuman;
     }
 
     @PostMapping("attendance/attend")
