@@ -3,13 +3,22 @@ package capstone.videochat.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "attendance") //컬렉션 이름
 public class Attendance {
     @Id
     String _id; //PRIMARY KEY
+<<<<<<< Updated upstream
     String meetingRoom_id; //미팅룸 번호
     String studentId; //User 컬렉션의 학번 저장
     String date; //미팅룸 출석 날짜
+=======
+    String meetingRoom_id;
+    String studentId; //Member 컬렉션의 학번 저장
+    Date date;
+
+>>>>>>> Stashed changes
 
     public String get_id() {
         return _id;
@@ -35,11 +44,16 @@ public class Attendance {
         this.studentId = studentId;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
+<<<<<<< Updated upstream
 }
+=======
+
+}
+>>>>>>> Stashed changes
