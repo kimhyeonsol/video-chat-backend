@@ -12,8 +12,8 @@ public class FaceDetectionService {
 
     public boolean checkUserAttendance(User user) throws IOException {
 
-
-        File file = new File("C:\\Users\\DELL\\Desktop\\capstone\\face-detection\\image_base64.txt") ;
+        String path = "C:/Users/DELL/Desktop/capstone/face-detection/";
+        File file = new File(path+"image_base64.txt") ;
 
         // true 지정시 파일의 기존 내용에 이어서 작성
         FileWriter fileWriter = new FileWriter(file, true) ;
@@ -31,7 +31,7 @@ public class FaceDetectionService {
             final String inputData = "image_base64.txt";
             
             //path 에다가 파이썬 파일이 있는 경로 설정
-            String path = "C:/Users/DELL/Desktop/capstone/face-detection/";
+
             
             String command ="python " + path + "face_detection.py " + path + inputData + " " + path;
 
