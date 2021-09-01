@@ -1,4 +1,5 @@
 package capstone.videochat.service;
+import capstone.videochat.DTO.FaceImageDTO;
 import capstone.videochat.domain.User;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ public class FaceDetectionService {
     BufferedReader input =null;
     BufferedWriter output =null;
 
-    public boolean checkUserAttendance(User user) throws IOException {
+    public boolean checkUserAttendance(FaceImageDTO faceImageDTO) throws IOException {
 
         String path = "C:/Users/DELL/Desktop/capstone/face-detection/";
         File file = new File(path+"image_base64.txt") ;
@@ -18,7 +19,7 @@ public class FaceDetectionService {
         // true 지정시 파일의 기존 내용에 이어서 작성
         FileWriter fileWriter = new FileWriter(file, true) ;
         // 파일안에 문자열 쓰기
-        fileWriter.write(user.getFaceImage_1());
+        fileWriter.write(faceImageDTO.getFaceImage());
         fileWriter.flush();
 
         // 객체 닫기

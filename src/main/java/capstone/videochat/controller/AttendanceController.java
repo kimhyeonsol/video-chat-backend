@@ -3,6 +3,7 @@ package capstone.videochat.controller;
 
 
 import capstone.videochat.DTO.AttendanceDTO;
+import capstone.videochat.DTO.FaceImageDTO;
 import capstone.videochat.domain.Attendance;
 import capstone.videochat.service.AttendanceService;
 import capstone.videochat.domain.User;
@@ -29,8 +30,8 @@ public class AttendanceController {
     @CrossOrigin("*")
     @PostMapping("attendance/checkFaceId")
     @ResponseBody
-    public boolean processCheckFaceId(@RequestBody User user) throws IOException {
-        final boolean isHuman = faceDetectionService.checkUserAttendance(user);
+    public boolean processCheckFaceId(@RequestBody FaceImageDTO faceImageDTO) throws IOException {
+        final boolean isHuman = faceDetectionService.checkUserAttendance(faceImageDTO);
         return isHuman;
     }
 
