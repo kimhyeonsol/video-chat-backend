@@ -1,8 +1,8 @@
 package capstone.videochat.DTO;
 
 public class AttendanceDTO {
-    String meetingRoomNum;
-    String userSessionId;
+    String meetingRoomNum; //미팅룸 번호
+    String userSessionId; //user 세션 id
 
     public String getMeetingRoomNum() {
         return meetingRoomNum;
