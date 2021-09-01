@@ -9,16 +9,12 @@ import java.util.Date;
 public class Attendance {
     @Id
     String _id; //PRIMARY KEY
-<<<<<<< Updated upstream
-    String meetingRoom_id; //미팅룸 번호
-    String studentId; //User 컬렉션의 학번 저장
-    String date; //미팅룸 출석 날짜
-=======
+
     String meetingRoom_id;
     String studentId; //Member 컬렉션의 학번 저장
     Date date;
 
->>>>>>> Stashed changes
+
 
     public String get_id() {
         return _id;
@@ -51,9 +47,5 @@ public class Attendance {
     public void setDate(Date date) {
         this.date = date;
     }
-<<<<<<< Updated upstream
 }
-=======
 
-}
->>>>>>> Stashed changes
