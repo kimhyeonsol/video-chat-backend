@@ -7,10 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Attendance {
     @Id
     String _id; //PRIMARY KEY
-    String meetingRoom_id;
-    String studentId; //Member 컬렉션의 학번 저장
-    String date;
-    String attendance_status;
+    String meetingRoom_id; //미팅룸 번호
+    String studentId; //User 컬렉션의 학번 저장
+    String date; //미팅룸 출석 날짜
 
     public String get_id() {
         return _id;
@@ -42,13 +41,5 @@ public class Attendance {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getAttendance() {
-        return attendance_status;
-    }
-
-    public void setAttendance(String attendance_status) {
-        this.attendance_status = attendance_status;
     }
 }

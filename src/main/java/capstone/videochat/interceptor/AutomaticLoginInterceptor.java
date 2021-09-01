@@ -20,11 +20,10 @@ public class AutomaticLoginInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         //컨트롤러보다 먼저 수행되는 메서드
         HttpSession session = request.getSession();
         Object obj = session.getAttribute("userId");
-        System.out.println("실행");
 
         if (obj ==null){ // 로그인된 세션이 없는 경우
             Cookie loginCookie = WebUtils.getCookie(request,"loginCookie"); //쿠키 꺼내옴

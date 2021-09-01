@@ -55,15 +55,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String recallName(String userId) {
-        User findUser;
-
-        findUser = userRepository.findById(userId);
-
-        return findUser.getName();
-    }
-
-    @Override
     public UserIdDTO recallUserId(UserSessionIdDTO userSessionIdDTO) {
         User findUser;
         UserIdDTO userIdDTO = new UserIdDTO();
@@ -75,7 +66,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserNameDTO responseUserName(UserIdDTO userIdDTO) {
+    public UserNameDTO recallUserName(UserIdDTO userIdDTO) {
         User findUser;
         UserNameDTO userNameDTO = new UserNameDTO();
 

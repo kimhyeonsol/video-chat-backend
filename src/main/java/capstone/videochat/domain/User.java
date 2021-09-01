@@ -9,15 +9,15 @@ import java.util.Date;
 public class User {
     @Id
     private String id; //PRIMARY KEY
-    private String password;
-    private String name;
-    private String major;
-    private String studentId;
-    private String faceImage_1;
-    private String faceImage_2;
-    private String faceImage_3;
-    private String sessionId;
-    private Date validTime;
+    private String password; //비밀번호
+    private String name; //이름
+    private String major; //학과
+    private String studentId; //학번
+    private String faceImage_1; //정면사진 1
+    private String faceImage_2; //정면사진 2
+    private String faceImage_3; //정면사진 3
+    private String sessionId; //세션 id
+    private Date validTime; //유효시간
 
     public String getId() {
         return id;
