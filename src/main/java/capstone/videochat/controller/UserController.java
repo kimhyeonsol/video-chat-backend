@@ -5,6 +5,7 @@ import capstone.videochat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +53,7 @@ public class UserController {
     @CrossOrigin("*")
     @PostMapping("/user/login")
     @ResponseBody
-    public UserCookieDTO processLogIn(@RequestBody final UserLoginDTO userLoginDTO, HttpServletRequest request, HttpServletResponse response) throws ParseException {
+    public UserCookieDTO processLogIn(@RequestBody final UserLoginDTO userLoginDTO, HttpServletRequest request, HttpServletResponse response) {
         //로그인
         UserCookieDTO userCookieDTO = new UserCookieDTO();
 
@@ -71,12 +72,12 @@ public class UserController {
                 session.removeAttribute("userId");// 기존값 제거
             }
 
-            if(userLoginDTO.getUseCookie()){ //자동 로그인 체크했을 시
-                Cookie cookie = new Cookie("loginCookie", session.getId());
-                cookie.setPath("/");
+            if(userLoginDTO.getUseCookie()) { //자동 로그인 체크했을 시
+                //Cookie cookie = new Cookie("loginCookie", session.getId());
+                //cookie.setPath("/");
                 int amount = 60*60*24*7;
-                cookie.setMaxAge(amount); //쿠키 유효시간 7일
-                response.addCookie(cookie); //쿠키 적용
+                //cookie.setMaxAge(amount); //쿠키 유효시간 7일
+                //response.addCookie(cookie); //쿠키 적용
 
                 Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 
@@ -85,6 +86,10 @@ public class UserController {
                 userCookieDTO.setCookieName("loginCookie");
                 userCookieDTO.setSessionId(session.getId());
                 userCookieDTO.setValidTime(sessionLimit);
+            }
+            else if(userLoginDTO.getUseCookie() == false) { //자동 로그인 해제했을 시
+                Date sessionLimit =new Date(System.currentTimeMillis());
+                userService.automaticLogin(userLoginDTO.getId(), session.getId(), sessionLimit);
             }
         }
 
@@ -108,7 +113,7 @@ public class UserController {
     @CrossOrigin("*")
     @GetMapping("/user/logout")
     @ResponseBody
-    public void logOut(HttpServletRequest request){
+    public void logOut(HttpServletRequest request, HttpServletResponse response){
         //로그아웃 로그인 페이지 렌더링
         System.out.println("Logout!");
         HttpSession session = request.getSession();
