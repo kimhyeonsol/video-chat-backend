@@ -19,10 +19,6 @@ public class AppConfig {
         return new UserServiceImpl(userRepository());
     }
 
-    @Bean
-    public MeetingService meetingService() {
-        return new MeetingServiceImpl(meetingRepository());
-    }
 
     @Bean
     public AttendanceService attendanceService() {
@@ -34,10 +30,6 @@ public class AppConfig {
         return new MongoDBUserRepository();
     }
 
-    @Bean
-    public MeetingRepository meetingRepository() {
-        return new MemoryMeetingRepository();
-    }
 
     @Bean
     public MongoDBAttendanceRepository attendanceRepository() {
