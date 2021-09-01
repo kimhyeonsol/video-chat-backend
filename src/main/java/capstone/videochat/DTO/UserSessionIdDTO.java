@@ -1,7 +1,7 @@
 package capstone.videochat.DTO;
 
 public class UserSessionIdDTO {
-    String sessionId;
+    String sessionId; //user 세션 id
 
     public String getSessionId() {
         return sessionId;

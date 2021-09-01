@@ -3,10 +3,10 @@ package capstone.videochat.DTO;
 import java.util.Date;
 
 public class UserCookieDTO {
-    private boolean loginResult;
-    private String cookieName;
-    private String sessionId;
-    private Date validTime;
+    private boolean loginResult; //로그인 성공 여부
+    private String cookieName; //쿠키 이름
+    private String sessionId; //세션 id
+    private Date validTime; //유효시간
 
     public boolean getLoginResult() {
         return loginResult;

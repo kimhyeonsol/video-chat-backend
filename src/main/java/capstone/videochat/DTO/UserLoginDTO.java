@@ -3,7 +3,7 @@ package capstone.videochat.DTO;
 public class UserLoginDTO {
     String id;
     String password;
-    boolean useCookie;
+    boolean useCookie; //아이디 기억하기 체크 여부
 
     public String getId() {
         return id;

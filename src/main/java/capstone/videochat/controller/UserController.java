@@ -24,12 +24,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    //    @GetMapping("/user/new-account")
-//    @ResponseBody
-//    public void displayCreateAccountPage(){
-//        //회원가입 페이지 렌더링
-//    }
-//
     @CrossOrigin("*")
     @PostMapping("/user/new-account")
     @ResponseBody
@@ -43,12 +37,6 @@ public class UserController {
 
         return true;
     }
-
-//    @GetMapping("/user/login")
-//    @ResponseBody
-//    public void displayLogInPage(){
-//        //로그인 페이지 렌더링
-//    }
 
     @CrossOrigin("*")
     @PostMapping("/user/login")
@@ -100,7 +88,7 @@ public class UserController {
     @PostMapping("/user/getName")
     @ResponseBody
     public UserNameDTO responseUserName(@RequestBody final UserIdDTO UserIdDTO){
-        return userService.responseUserName(UserIdDTO);
+        return userService.recallUserName(UserIdDTO);
     }
 
     @CrossOrigin("*")
@@ -114,7 +102,6 @@ public class UserController {
     @GetMapping("/user/logout")
     @ResponseBody
     public void logOut(HttpServletRequest request, HttpServletResponse response){
-        //로그아웃 로그인 페이지 렌더링
         System.out.println("Logout!");
         HttpSession session = request.getSession();
         session.invalidate(); //세션에 유지된 정보 삭제
