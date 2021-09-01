@@ -1,13 +1,9 @@
 package capstone.videochat.DTO;
 
 public class AttendanceDTO {
-<<<<<<< Updated upstream
-    String meetingRoomNum; //미팅룸 번호
-    String userSessionId; //user 세션 id
-=======
+
     String meetingRoomNum;
     String userId;
->>>>>>> Stashed changes
 
     public String getMeetingRoomNum() {
         return meetingRoomNum;
