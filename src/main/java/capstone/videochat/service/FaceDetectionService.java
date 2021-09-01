@@ -1,32 +1,50 @@
 package capstone.videochat.service;
+import capstone.videochat.domain.User;
+import org.springframework.stereotype.Service;
+
 import java.io.*;
 
+@Service
 public class FaceDetectionService {
 
     BufferedReader input =null;
     BufferedWriter output =null;
 
-    public boolean checkUserAttendance(byte[] image) throws IOException {
+    public boolean checkUserAttendance(User user) throws IOException {
+
+
+        File file = new File("C:\\Users\\DELL\\Desktop\\capstone\\face-detection\\image_base64.txt") ;
+
+        // true 지정시 파일의 기존 내용에 이어서 작성
+        FileWriter fileWriter = new FileWriter(file, true) ;
+        // 파일안에 문자열 쓰기
+        fileWriter.write(user.getFaceImage_1());
+        fileWriter.flush();
+
+        // 객체 닫기
+        fileWriter.close();
 
         try {
             long start, end;
             String line;
 
-            String inputData = " " + image.toString();
-
-            String execPath ="python C:\\Users\\DELL\\Desktop\\capstone\\face-detection\\face_detection.py"+inputData;
+            final String inputData = "image_base64.txt";
+            
+            //path 에다가 파이썬 파일이 있는 경로 설정
+            String path = "C:/Users/DELL/Desktop/capstone/face-detection/";
+            
+            String command ="python " + path + "face_detection.py " + path + inputData + " " + path;
 
             start = System.currentTimeMillis();
 
-            Process p = Runtime.getRuntime().exec(execPath);
+            Process p = Runtime.getRuntime().exec(command);
             output = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-
-            input =new BufferedReader(new InputStreamReader(p.getInputStream()));
+            input = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 
 
             while ((line = input.readLine()) !=null) {
-                if(line == "True"){
+                if(line.equals("True")){
                     return true;
                 }
                 else{
