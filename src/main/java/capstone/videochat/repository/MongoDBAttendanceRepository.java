@@ -13,11 +13,11 @@ public class MongoDBAttendanceRepository implements AttendanceRepository{
     MongoTemplate mongoTemplate;
 
     @Override
-    public String findBySessionId(String sessionId) {
+    public String findById(String userId) {
         User findUser;
 
-        Criteria criteria = new Criteria("sessionId");
-        criteria.is(sessionId);
+        Criteria criteria = new Criteria("_id");
+        criteria.is(userId);
 
         Query query = new Query(criteria);
         findUser = mongoTemplate.findOne(query, User.class, "user");

@@ -33,7 +33,7 @@ public class AttendanceServiceImpl implements AttendanceService{
         Date attendTime =new Date(System.currentTimeMillis());
 
         attendance.setMeetingRoom_id(attendanceDTO.getMeetingRoomNum());
-        attendance.setStudentId(attendanceRepository.findBySessionId(attendanceDTO.getUserSessionId()));
+        attendance.setStudentId(attendanceRepository.findById(attendanceDTO.getUserId()));
         attendance.setDate(attendTime);
         this.attendanceRepository.save(attendanceDTO);
         return true;

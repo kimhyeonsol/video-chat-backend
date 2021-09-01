@@ -6,5 +6,5 @@ import capstone.videochat.domain.Attendance;
 
 public interface AttendanceRepository {
     void save(AttendanceDTO attendanceDTO);
-    String findBySessionId(String sessionId);
+    String findById(String userId);
 }
