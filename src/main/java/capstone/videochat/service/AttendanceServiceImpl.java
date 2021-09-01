@@ -1,16 +1,24 @@
 package capstone.videochat.service;
 
+import capstone.videochat.DTO.AttendanceDTO;
 import capstone.videochat.domain.Attendance;
 import capstone.videochat.domain.User;
 import capstone.videochat.repository.MongoDBAttendanceRepository;
+import capstone.videochat.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 
 public class AttendanceServiceImpl implements AttendanceService{
 
+    @Autowired
     MongoDBAttendanceRepository attendanceRepository;
+
 
     public AttendanceServiceImpl(MongoDBAttendanceRepository attendanceRepository){
         this.attendanceRepository= attendanceRepository;
+
     }
 
     @Override
@@ -20,8 +28,14 @@ public class AttendanceServiceImpl implements AttendanceService{
     }
 
     @Override
-    public boolean attend(Attendance attendance) {
-        this.attendanceRepository.save(attendance);
+    public boolean attend(AttendanceDTO attendanceDTO) {
+        Attendance attendance=new Attendance();
+        Date attendTime =new Date(System.currentTimeMillis());
+
+        attendance.setMeetingRoom_id(attendanceDTO.getMeetingRoomNum());
+        attendance.setStudentId(attendanceRepository.findBySessionId(attendanceDTO.getUserSessionId()));
+        attendance.setDate(attendTime);
+        this.attendanceRepository.save(attendanceDTO);
         return true;
     }
 }
